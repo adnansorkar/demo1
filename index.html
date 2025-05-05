@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Sorter</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h2>কমা দিয়ে সংখ্যাগুলো লিখো (যেমন: 5,3,9,1):</h2>
+    <input type="text" id="numbers" placeholder="সংখ্যা লিখো">
+    <button id="sortBtn">Sort</button>
+
+    <h3>ফলাফল:</h3>
+    <div id="result" style="font-weight: bold; color: green;"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#sortBtn').click(function() {
+                let numbers = $('#numbers').val();
+
+                $.ajax({
+                    url: 'sort.php',
+                    method: 'POST',
+                    data: { numbers: numbers },
+                    success: function(response) {
+                        $('#result').html(response);
+                    },
+                    error: function() {
+                        $('#result').html("সার্ভারের সঙ্গে সমস্যা হয়েছে।");
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
